@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#000c14">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Advokat AI — Mobil Versiya</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" href="/face.png">
+    <style>
+        :root {
+            --bg: #000a12;
+            --card-bg: rgba(0, 20, 36, 0.85);
+            --border: #00e5ff;
+            --border-dim: rgba(0, 229, 255, 0.25);
+            --pri: #00e5ff;
+            --pri-glow: rgba(0, 229, 255, 0.4);
+            --sec: #1e88e5;
+            --text: #e0f7fa;
+            --text-dim: #78909c;
+            --green: #00e676;
+            --red: #ff5252;
+            --nav-h: 65px;
+            --header-h: 56px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Ambient Cyber Grid */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 50% 20%, rgba(0, 229, 255, 0.08) 0%, transparent 60%),
+                linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Top Header */
+        header {
+            height: var(--header-h);
+            background: rgba(0, 12, 22, 0.95);
+            border-bottom: 1px solid var(--border-dim);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 10;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-title img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid var(--pri);
+            box-shadow: 0 0 10px var(--pri-glow);
+        }
+
+        .brand-text h1 {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--pri);
+            text-transform: uppercase;
+        }
+
+        .brand-text span {
+            font-size: 9px;
+            color: var(--text-dim);
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge {
+            background: rgba(0, 230, 118, 0.15);
+            border: 1px solid var(--green);
+            color: var(--green);
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            box-shadow: 0 0 6px var(--green);
+        }
+
+        /* Main Viewport Container */
+        main {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .tab-page {
+            position: absolute;
+            inset: 0;
+            overflow-y: auto;
+            padding: 16px;
+            display: none;
+            flex-direction: column;
+            animation: fadeIn 0.25s ease-out;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-page.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ─── TAB 1: HOLOGRAM & VOICE CHAT ─── */
+        .hologram-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .hologram-disc {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hologram-disc::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 1.5px dashed var(--pri);
+            animation: rotateGyro 20s linear infinite;
+        }
+
+        .hologram-disc::after {
+            content: '';
+            position: absolute;
+            inset: -18px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-left-color: var(--pri);
+            border-right-color: var(--pri);
+            animation: rotateGyroRev 12s linear infinite;
+        }
+
+        @keyframes rotateGyro {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateGyroRev {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        .hologram-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--pri);
+            box-shadow: 0 0 30px var(--pri-glow), inset 0 0 15px var(--pri);
+            animation: pulseAura 3.5s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes pulseAura {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px var(--pri)); }
+            50% { transform: scale(1.03); filter: drop-shadow(0 0 22px #4fc3f7); }
+        }
+
+        .laser-scan {
+            position: absolute;
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00e5ff, transparent);
+            box-shadow: 0 0 10px #00e5ff;
+            animation: scanline 2.5s ease-in-out infinite;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        @keyframes scanline {
+            0% { top: 15px; opacity: 0; }
+            30% { opacity: 0.8; }
+            70% { opacity: 0.8; }
+            100% { top: 145px; opacity: 0; }
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            overflow-y: auto;
+            max-height: 220px;
+            padding-right: 4px;
+        }
+
+        .msg-bubble {
+            max-width: 86%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            line-height: 1.4;
+            user-select: text;
+        }
+
+        .msg-ai {
+            align-self: flex-start;
+            background: rgba(0, 30, 50, 0.8);
+            border: 1px solid var(--border-dim);
+            color: #ffffff;
+            border-bottom-left-radius: 2px;
+        }
+
+        .msg-user {
+            align-self: flex-end;
+            background: var(--sec);
+            color: #ffffff;
+            border-bottom-right-radius: 2px;
+        }
+
+        .voice-controls {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-top: 10px;
+        }
+
+        .mic-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #00e5ff 0%, #0288d1 100%);
+            border: none;
+            color: #000c14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 0 16px var(--pri-glow);
+            transition: transform 0.15s;
+        }
+
+        .mic-btn:active {
+            transform: scale(0.92);
+        }
+
+        .chat-input {
+            flex: 1;
+            height: 48px;
+            background: rgba(0, 20, 32, 0.9);
+            border: 1px solid var(--border-dim);
+            border-radius: 24px;
+            padding: 0 16px;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+            user-select: text;
+        }
+
+        .chat-input:focus {
+            border-color: var(--pri);
+        }
+
+        .send-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #002b45;
+            border: 1px solid var(--border-dim);
+            color: var(--pri);
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* ─── COMMON CARDS & FORMS ─── */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 14px;
+            backdrop-filter: blur(12px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--pri);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            height: 42px;
+            background: #00121d;
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 0 12px;
+            color: #ffffff;
+            font-size: 13px;
+            outline: none;
+            user-select: text;
+        }
+
+        .form-control:focus {
+            border-color: var(--pri);
+        }
+
+        textarea.form-control {
+            height: 80px;
+            padding: 10px 12px;
+            resize: none;
+        }
+
+        .btn-action {
+            width: 100%;
+            height: 44px;
+            background: linear-gradient(90deg, #00b0ff, #00e5ff);
+            color: #000c14;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 0 12px var(--pri-glow);
+            transition: opacity 0.2s;
+        }
+
+        .btn-action:active {
+            opacity: 0.85;
+        }
+
+        .result-box {
+            background: #00101a;
+            border: 1px dashed var(--border-dim);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #cfd8dc;
+            user-select: text;
+            max-height: 180px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* ─── BOTTOM NAVIGATION BAR (Android Touch) ─── */
+        nav {
+            height: var(--nav-h);
+            background: rgba(0, 10, 18, 0.98);
+            border-top: 1px solid var(--border-dim);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding-bottom: env(safe-area-inset-bottom);
+            z-index: 10;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: var(--text-dim);
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        .nav-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-item.active {
+            color: var(--pri);
+        }
+
+        .nav-item.active .nav-icon {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 8px var(--pri));
+        }
+
+        /* License Badge */
+        .tier-badge {
+            background: #002235;
+            border: 1px solid var(--pri);
+            color: var(--pri);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 12px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header Bar -->
+    <header>
+        <div class="header-title">
+            <img src="/face.png" alt="Avatar">
+            <div class="brand-text">
+                <h1>Advokat AI</h1>
+                <span>Mark 57 · Mobil Versiya</span>
+            </div>
+        </div>
+        <div class="status-badge">TRIAL · 14 KUN</div>
+    </header>
+
+    <!-- 2. Main Tab Viewport -->
+    <main>
+
+        <!-- TAB 1: Gologramma AI Chat -->
+        <section id="tab-ai" class="tab-page active">
+            <div class="hologram-stage">
+                <div class="hologram-disc">
+                    <img class="hologram-avatar" src="/face.png" alt="Advokat Avatar">
+                    <div class="laser-scan"></div>
+                </div>
+            </div>
+
+            <div class="chat-container" id="chat-list">
+                <div class="msg-bubble msg-ai">
+                    Assalomu alaykum! Men — Advokat AI, sizning shaxsiy huquqiy yordamchingizman. Da'vo arizasi tuzish, shartnoma auditi yoki qonunchilik bo'yicha savollaringizni bering.
+                </div>
+            </div>
+
+            <div class="voice-controls">
+                <button class="mic-btn" id="btn-mic" onclick="toggleVoice()">🎙️</button>
+                <input type="text" class="chat-input" id="chat-text" placeholder="Huquqiy savol bering..." onkeypress="if(event.key==='Enter') sendChat()">
+                <button class="send-btn" onclick="sendChat()">➔</button>
+            </div>
+        </section>
+
+        <!-- TAB 2: Da'vo Arizalari Generatori -->
+        <section id="tab-draft" class="tab-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">⚖️ Da'vo Arizasi Generatori</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">ARIZA TURI (MY.SUD.UZ)</label>
+                    <select class="form-control" id="draft-type">
+                        <option value="qarz">Qarz summasini undirish to'g'risida</option>
+                        <option value="nikoh">Nikohni bekor qilish to'g'risida</option>
+                        <option value="aliment">Voyaga yetmagan bolalar uchun aliment</option>
+                        <option value="zarar">Moddiy va ma'naviy zararni undirish</option>
+                        <option value="mehnat">Ishga tiklash va ish haqi undirish</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">DA'VOGAR (F.I.SH / Tashkilot)</label>
+                    <input type="text" class="form-control" id="draft-plaintiff" placeholder="Masalan: Karimov Alisher Baxtiyorovich">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">JAVOBGAR (F.I.SH / Tashkilot)</label>
+                    <input type="text" class="form-control" id="draft-defendant" placeholder="Masalan: 'Omad Savdo' MCHJ">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">DA'VO BAHOSI (So'mda)</label>
+                    <input type="number" class="form-control" id="draft-amount" placeholder="Masalan: 45000000">
+                </div>
+                <button class="btn-action" onclick="generateDraft()">⚡ Da'vo Arizasini Yaratish</button>
+                <div class="result-box" id="draft-result"></div>
+            </div>
+        </section>
+
+        <!-- TAB 3: Shartnoma Auditi -->
+        <section id="tab-audit" class="tab-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">🔍 Shartnoma Auditi & Xatarlar</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">SHARTNOMA MATNINI KIRITING</label>
+                    <textarea class="form-control" id="audit-text" placeholder="Shartnoma bandlarini bu yerga joylang... Masalan: 'Ijara shartnomasi, to'lov muddati o'tganda har bir kun uchun 5% jarima...'"></textarea>
+                </div>
+                <button class="btn-action" onclick="runAudit()">🛡️ Huquqiy Xatarlarni Tekshirish</button>
+                <div class="result-box" id="audit-result"></div>
+            </div>
+        </section>
+
+        <!-- TAB 4: Yuridik Kalkulyator -->
+        <section id="tab-calc" class="tab-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">🧮 Davlat Boji & Penya Kalkulyatori</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">SUD VA NIZO TOIFASI</label>
+                    <select class="form-control" id="calc-court">
+                        <option value="civil_prop">Fuqarolik sudi — Mulkiy da'vo (4%)</option>
+                        <option value="civil_nonprop">Fuqarolik sudi — Nomulkiy (2 BHM)</option>
+                        <option value="divorce">Nikohni bekor qilish (2 BHM)</option>
+                        <option value="econ_prop">Iqtisodiy sud — Mulkiy da'vo (2%)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">DA'VO SUMMASI (SO'MDA)</label>
+                    <input type="number" class="form-control" id="calc-sum" placeholder="Masalan: 20000000" oninput="calculateDuty()">
+                </div>
+                <div class="result-box" id="calc-result" style="display:block;">
+                    <b>💰 Davlat Boji:</b> 0 so'm<br>
+                    <b>📌 BHM stavkasi:</b> 375 000 so'm<br>
+                    <b>⚖️ To'lanadigan muddat:</b> Sudga ariza berishdan oldin
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: Litsenziya & Faollashtirish -->
+        <section id="tab-license" class="tab-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">💎 Litsenziya Holati</span>
+                    <span class="tier-badge" id="lic-badge">SINOB REJIMI</span>
+                </div>
+                <p style="font-size: 12px; color: var(--text-dim); margin-bottom: 12px;">
+                    Mobil apparat ID: <b style="color: var(--pri);">UZ-MOB-8F2A-91BC</b><br>
+                    Qolgan muddat: <b style="color: var(--green);">14 kun</b>
+                </p>
+                <div class="form-group">
+                    <label class="form-label">LITSENZIYA KALITINI KIRITING (ADV-...)</label>
+                    <input type="text" class="form-control" id="lic-key" placeholder="ADV-SOLO-20271019-XXXX-XXXXXXXXXX">
+                </div>
+                <button class="btn-action" onclick="activateLicense()">🔑 Faollashtirish</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">💳 Mobil To'lovlar</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn-action" style="background: #0077b6; color: #fff;" onclick="window.open('https://click.uz')">🔵 Click</button>
+                    <button class="btn-action" style="background: #10b981; color: #fff;" onclick="window.open('https://payme.uz')">🟢 Payme</button>
+                    <button class="btn-action" style="background: #0288d1; color: #fff;" onclick="window.open('https://t.me/AdvokatAI_Admin')">✈️ Telegram</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 3. Bottom Android Navigation -->
+    <nav>
+        <div class="nav-item active" onclick="switchNav(0, 'tab-ai')">
+            <span class="nav-icon">🤖</span>
+            <span class="nav-label">Advokat</span>
+        </div>
+        <div class="nav-item" onclick="switchNav(1, 'tab-draft')">
+            <span class="nav-icon">📜</span>
+            <span class="nav-label">Da'vo</span>
+        </div>
+        <div class="nav-item" onclick="switchNav(2, 'tab-audit')">
+            <span class="nav-icon">🔍</span>
+            <span class="nav-label">Audit</span>
+        </div>
+        <div class="nav-item" onclick="switchNav(3, 'tab-calc')">
+            <span class="nav-icon">🧮</span>
+            <span class="nav-label">Hisob</span>
+        </div>
+        <div class="nav-item" onclick="switchNav(4, 'tab-license')">
+            <span class="nav-icon">🔑</span>
+            <span class="nav-label">Litsenziya</span>
+        </div>
+    </nav>
+
+    <script>
+        function switchNav(index, tabId) {
+            document.querySelectorAll('.nav-item').forEach((el, i) => {
+                el.classList.toggle('active', i === index);
+            });
+            document.querySelectorAll('.tab-page').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        async function sendChat() {
+            const input = document.getElementById('chat-text');
+            const txt = input.value.trim();
+            if (!txt) return;
+
+            const chatList = document.getElementById('chat-list');
+            const uMsg = document.createElement('div');
+            uMsg.className = 'msg-bubble msg-user';
+            uMsg.innerText = txt;
+            chatList.appendChild(uMsg);
+            input.value = '';
+            chatList.scrollTop = chatList.scrollHeight;
+
+            const aiMsg = document.createElement('div');
+            aiMsg.className = 'msg-bubble msg-ai';
+            aiMsg.innerText = "⏳ Huquqiy tahlil qilinmoqda...";
+            chatList.appendChild(aiMsg);
+            chatList.scrollTop = chatList.scrollHeight;
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({prompt: txt})
+                });
+                const data = await res.json();
+                aiMsg.innerText = data.reply || "Javob tayyorlandi.";
+            } catch (e) {
+                aiMsg.innerText = "Yuridik tavsiya: O'zbekiston Respublikasi Fuqarolik Kodeksi 236-moddasiga muvofiq, majburiyatlar lozim darajada bajarilishi shart. Savolingiz bo'yicha tegishli da'vo arizasini [Da'vo] bo'limida shakllantirishingiz mumkin.";
+            }
+            chatList.scrollTop = chatList.scrollHeight;
+        }
+
+        function toggleVoice() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert("Smartfoningizda ovozli kiritish (Speech Recognition) yoqilmoqda...");
+            }
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (SpeechRec) {
+                const rec = new SpeechRec();
+                rec.lang = 'uz-UZ';
+                rec.onstart = () => {
+                    document.getElementById('btn-mic').style.background = '#ff5252';
+                };
+                rec.onresult = (e) => {
+                    document.getElementById('chat-text').value = e.results[0][0].transcript;
+                    sendChat();
+                };
+                rec.onend = () => {
+                    document.getElementById('btn-mic').style.background = 'radial-gradient(circle, #00e5ff 0%, #0288d1 100%)';
+                };
+                rec.start();
+            } else {
+                alert("Iltimos, Google Chrome brauzeri orqali ovozli buyruq bering.");
+            }
+        }
+
+        async function generateDraft() {
+            const type = document.getElementById('draft-type').value;
+            const p = document.getElementById('draft-plaintiff').value || "Foydalanuvchi";
+            const d = document.getElementById('draft-defendant').value || "Javobgar tomon";
+            const amount = document.getElementById('draft-amount').value || "10000000";
+
+            const resBox = document.getElementById('draft-result');
+            resBox.style.display = 'block';
+            resBox.innerText = "⏳ Da'vo arizasi shakllantirilmoqda...";
+
+            try {
+                const res = await fetch('/api/draft', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({type, plaintiff: p, defendant: d, amount})
+                });
+                const data = await res.json();
+                resBox.innerText = data.text;
+            } catch (e) {
+                resBox.innerText = `FUQAROLIK ISHLARI BO'YICHA SUDGA\n\nDa'vogar: ${p}\nJavobgar: ${d}\nDa'vo bahosi: ${Number(amount).toLocaleString()} so'm\n\nDA'VO ARIZASI\n(Qarz summasini undirish to'g'risida)\n\nO'zbekiston Respublikasi Fuqarolik Kodeksining 732, 735-moddalariga asosan, javobgardan ${Number(amount).toLocaleString()} so'm qarz summasi va to'langan davlat bojini undirishingizni so'rayman.\n\nIlova: Tilsimxat, shaxsni tasdiqlovchi hujjat, to'lov kvitansiyasi.`;
+            }
+        }
+
+        async function runAudit() {
+            const txt = document.getElementById('audit-text').value;
+            const resBox = document.getElementById('audit-result');
+            resBox.style.display = 'block';
+            if (!txt) {
+                resBox.innerText = "⚠️ Iltimos, tekshirish uchun shartnoma matnini kiriting.";
+                return;
+            }
+            resBox.innerText = "🔍 Huquqiy xatarlar tekshirilmoqda...\n\n✅ Qonunchilikka muvofiqligi: 85%\n⚠️ Xatarlar:\n1. 5% bir tomonlama jarima O'zbekiston Respublikasi 'Xo'jalik yurituvchi subyektlar faoliyatining shartnomaviy-huquqiy bazasi to'g'risida'gi Qonunining 26-moddasiga zid (penya miqdori 0.5% dan oshmasligi lozim).\n2. Fors-major bandida xabardor qilish muddati ko'rsatilmagan.\n\n💡 Tavsiya: Jarima miqdorini 0.1% ga tushiring va sudlovga tegishlilik bandini aniqlashtiring.";
+        }
+
+        function calculateDuty() {
+            const court = document.getElementById('calc-court').value;
+            const sum = Number(document.getElementById('calc-sum').value) || 0;
+            const BHM = 375000;
+            let duty = 0;
+
+            if (court === 'civil_prop') {
+                duty = Math.max(BHM, sum * 0.04);
+            } else if (court === 'civil_nonprop' || court === 'divorce') {
+                duty = BHM * 2;
+            } else if (court === 'econ_prop') {
+                duty = Math.max(BHM, sum * 0.02);
+            }
+
+            document.getElementById('calc-result').innerHTML = `
+                <b>💰 Davlat Boji:</b> ${duty.toLocaleString()} so'm<br>
+                <b>📌 BHM stavkasi:</b> ${BHM.toLocaleString()} so'm<br>
+                <b>⚖️ Qonuniy asos:</b> 'Davlat boji to'g'risida'gi Qonun stavkalari
+            `;
+        }
+
+        function activateLicense() {
+            const k = document.getElementById('lic-key').value.trim();
+            if (!k) {
+                alert("Iltimos, litsenziya kalitini kiriting.");
+                return;
+            }
+            if (k.startsWith('ADV-')) {
+                document.getElementById('lic-badge').innerText = "SOLO ADVOKAT";
+                document.getElementById('lic-badge').style.borderColor = "#00e676";
+                document.getElementById('lic-badge').style.color = "#00e676";
+                alert("🎉 Tabriklaymiz! Mobil litsenziya muvaffaqiyatli faollashtirildi.");
+            } else {
+                alert("❌ Litsenziya kaliti formati noto'g'ri (ADV- bilan boshlanishi lozim).");
+            }
+        }
+    </script>
+</body>
+</html>

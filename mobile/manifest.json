@@ -1,0 +1,18 @@
+{
+  "name": "Advokat AI Mobile",
+  "short_name": "Advokat AI",
+  "description": "O'zbekiston Respublikasi Huquqiy Sun'iy Intellekti - Android Mobil Versiyasi",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000c14",
+  "theme_color": "#000c14",
+  "icons": [
+    {
+      "src": "/face.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

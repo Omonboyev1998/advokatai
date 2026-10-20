@@ -1,0 +1,15 @@
+{
+  "os_system": "windows",
+  "local_only": false,
+  "gemini_api_key": "YOUR_GEMINI_API_KEY_HERE",
+  "hud_style": "face",
+  "wake_word_enabled": false,
+  "push_to_talk_enabled": false,
+  "morning_brief_enabled": false,
+  "camera_index": 0,
+  "voice_name": "Charon",
+  "assistant_name": "ADVOKAT AI",
+  "user_name": "",
+  "ui_color": "#1e88e5",
+  "plugins_enabled": {}
+}

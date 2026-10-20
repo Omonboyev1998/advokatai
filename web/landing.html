@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADVOKAT AI — O'zbekistonning Professional Yuridik Sun'iy Intellekti</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: SF Pro / Inter style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        apple: {
+                            bg: '#F5F5F7',
+                            card: '#FFFFFF',
+                            border: '#E5E5EA',
+                            text: '#1D1D1F',
+                            subtext: '#86868B',
+                            blue: '#0071E3',
+                            blueHover: '#0077ED',
+                            accent: '#2997FF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    boxShadow: {
+                        'macos': '0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 1px 1px rgba(0, 0, 0, 0.03)',
+                        'macos-card': '0 10px 30px -10px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02)',
+                        'macos-hover': '0 30px 60px -20px rgba(0, 0, 0, 0.12), 0 0 1px 1px rgba(0, 0, 0, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #FBFBFD;
+            color: #1D1D1F;
+        }
+        .macos-glass {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .window-traffic-lights {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+        }
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+        .traffic-close { background: #FF5F56; border: 1px solid #E0443E; }
+        .traffic-min { background: #FFBD2E; border: 1px solid #DEA123; }
+        .traffic-max { background: #27C93F; border: 1px solid #1AAB29; }
+        .gradient-text-apple {
+            background: linear-gradient(180deg, #1D1D1F 0%, #434344 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="selection:bg-blue-600 selection:text-white antialiased font-sans">
+
+    <!-- Top Status Bar (macOS style) -->
+    <header class="sticky top-0 z-50 macos-glass transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-apple-blue flex items-center justify-center text-white text-base shadow-sm">
+                    ⚖️
+                </div>
+                <div>
+                    <span class="font-bold text-base tracking-tight text-apple-text">ADVOKAT <span class="text-apple-blue font-extrabold">AI</span></span>
+                    <span class="text-[10px] block font-mono text-apple-subtext -mt-0.5 tracking-wider uppercase">Mark 57 Pro</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-[13px] font-medium text-neutral-600">
+                <a href="#features" class="hover:text-apple-blue transition-colors">Imkoniyatlar</a>
+                <a href="#demo" class="hover:text-apple-blue transition-colors">Jonli Darcha</a>
+                <a href="#standards" class="hover:text-apple-blue transition-colors">my.sud.uz Standartlari</a>
+                <a href="#pricing" class="hover:text-apple-blue transition-colors">Tariflar</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button onclick="openLicenseModal()" class="text-xs font-semibold px-3.5 py-2 rounded-full border border-neutral-300/80 text-neutral-700 bg-white hover:bg-neutral-50 shadow-sm transition">
+                    <i class="fa-solid fa-key text-neutral-400 mr-1.5 text-[11px]"></i> Kalit
+                </button>
+                <a href="#pricing" class="text-xs font-semibold px-4 py-2 rounded-full bg-apple-blue hover:bg-apple-blueHover text-white shadow-sm transition">
+                    Sinovdan Boshlash
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section: Clean Apple Style -->
+    <section class="pt-20 pb-16 px-6 max-w-5xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/60 text-apple-blue text-xs font-medium mb-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-apple-blue"></span>
+            O'zbekistonning Oliy Sud Portallari bilan integratsiyalashgan
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-neutral-900 mb-6 leading-tight">
+            Sudga da'vo arizasini <br class="hidden sm:block">
+            <span class="text-apple-blue">bir soniyada</span> tayyorlang.
+        </h1>
+
+        <p class="max-w-2xl mx-auto text-base md:text-lg text-neutral-500 font-normal leading-relaxed mb-10">
+            O'zbekiston Respublikasi protsessual qonunchiligi (FPK, IPK, MK) va <strong class="text-neutral-800">my.sud.uz</strong> talablariga mos 
+            chapdan 3.0 sm tikish chegarali Word (.docx) sud hujjatlari, shartnomalar tahlili va sud zal trenajyori.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
+            <a href="#pricing" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-apple-blue hover:bg-apple-blueHover text-white font-semibold text-sm shadow-md transition flex items-center justify-center gap-2">
+                14 Kun Bepul Foydalanish
+            </a>
+            <button onclick="document.getElementById('demo').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white hover:bg-neutral-50 border border-neutral-300 text-neutral-800 font-medium text-sm shadow-sm transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-play text-neutral-400 text-xs"></i> Jonli Namoyish
+            </button>
+        </div>
+
+        <!-- Download Client Packages -->
+        <div class="inline-flex items-center gap-4 p-2 bg-neutral-100/90 rounded-2xl border border-neutral-200/90 mb-16 text-xs">
+            <a href="/downloads/AdvokatAI_Windows.zip" onclick="alert('Advokat AI Windows dasturi yuklab olinmoqda (v5.7.0)')" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-neutral-50 text-neutral-800 font-semibold shadow-sm transition border border-neutral-200">
+                <i class="fa-brands fa-windows text-blue-600 text-sm"></i> Windows .EXE Yuklab Olish
+            </a>
+            <a href="/downloads/AdvokatAI_Android.apk" onclick="alert('Advokat AI Android APK paketi yuklab olinmoqda (v5.7.0)')" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-neutral-50 text-neutral-800 font-semibold shadow-sm transition border border-neutral-200">
+                <i class="fa-brands fa-android text-emerald-600 text-sm"></i> Android .APK Yuklab Olish
+            </a>
+        </div>
+
+        <!-- macOS App Window Mockup -->
+        <div class="bg-white rounded-2xl shadow-macos border border-neutral-200/80 overflow-hidden text-left max-w-4xl mx-auto">
+            <!-- Window Top Toolbar -->
+            <div class="bg-neutral-100/90 border-b border-neutral-200 px-4 py-3 flex items-center justify-between">
+                <div class="window-traffic-lights">
+                    <div class="traffic-light traffic-close"></div>
+                    <div class="traffic-light traffic-min"></div>
+                    <div class="traffic-light traffic-max"></div>
+                </div>
+                <div class="text-xs font-medium text-neutral-500 flex items-center gap-1.5 font-mono">
+                    <i class="fa-solid fa-lock text-[10px] text-neutral-400"></i> advokat-ai.workspace — Mark 57 HUD
+                </div>
+                <div class="w-14 text-right">
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-medium">Faol</span>
+                </div>
+            </div>
+
+            <!-- Window Content -->
+            <div class="p-6 md:p-8 bg-neutral-50/50 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-4 rounded-xl bg-white border border-neutral-200/80 shadow-macos-card">
+                    <div class="text-apple-blue text-xl mb-3"><i class="fa-solid fa-file-word"></i></div>
+                    <h3 class="font-bold text-sm text-neutral-800 mb-1">Sudga Da'vo Arizasi</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        my.sud.uz va template.sud.uz ning 115 ta andozasi asosida chop etishga tayyor Word (.docx).
+                    </p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-white border border-neutral-200/80 shadow-macos-card">
+                    <div class="text-emerald-600 text-xl mb-3"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="font-bold text-sm text-neutral-800 mb-1">Shartnoma Auditi</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        Yashirin xatarlar, nomutanosib jarimalar va qalloblik bandlarini aniqlovchi Due Diligence xulosasi.
+                    </p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-white border border-neutral-200/80 shadow-macos-card">
+                    <div class="text-purple-600 text-xl mb-3"><i class="fa-solid fa-gavel"></i></div>
+                    <h3 class="font-bold text-sm text-neutral-800 mb-1">Moot Court Trenajyor</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        Sudya va muxolif advokatning kutilmagan savollariga oldindan tayyorlanish virtual zali.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive macOS Window: Live Generator -->
+    <section id="demo" class="py-20 px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-xs font-semibold tracking-wider text-apple-blue uppercase mb-2 block">Interaktiv Tajriba</span>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 mb-3">
+                O'zbekiston Sud Da'vosi Namunasi
+            </h2>
+            <p class="text-sm text-neutral-500">Quyidagi maydonga holatni kiriting va Word hujjati qanday tuzilishini ko'ring</p>
+        </div>
+
+        <!-- macOS Document Generator Window -->
+        <div class="bg-white rounded-2xl shadow-macos border border-neutral-200/90 overflow-hidden">
+            <div class="bg-neutral-100 border-b border-neutral-200 px-4 py-3 flex items-center justify-between">
+                <div class="window-traffic-lights">
+                    <div class="traffic-light traffic-close"></div>
+                    <div class="traffic-light traffic-min"></div>
+                    <div class="traffic-light traffic-max"></div>
+                </div>
+                <div class="text-xs font-semibold text-neutral-600">
+                    Da'vo Arizasi Generatori (my.sud.uz Standarti)
+                </div>
+                <div class="text-xs font-mono text-neutral-400">Word 2026</div>
+            </div>
+
+            <div class="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Parameters form -->
+                <div class="lg:col-span-5 flex flex-col justify-between">
+                    <div>
+                        <label class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-2">Hujjat Toifasi:</label>
+                        <select id="demoDocType" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl p-3 text-xs text-neutral-800 mb-4 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <option value="qarz">Qarz undirish da'vosi (FPK 189 / Tilxat)</option>
+                            <option value="yetkazib_berish">Mahsulot yetkazib berish qarzi (IPK 148)</option>
+                            <option value="mehnat">Ishga tiklash & ish haqi (MK 541)</option>
+                            <option value="ijara">Ijara shartnomasini bekor qilish (FK 553)</option>
+                        </select>
+
+                        <label class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-2">Nizo Tafsilotlari:</label>
+                        <textarea id="demoPrompt" rows="6" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl p-3 text-xs text-neutral-800 focus:ring-2 focus:ring-blue-500 focus:outline-none font-sans leading-relaxed">Javobgar Karimov Sanjar 2023 yil 10 sentyabrda tilxat asosida 50 000 000 so'm qarz olgan. Qaytarish muddati 2024 yil 10 yanvar edi, hanuzgacha qaytarmayapti. Sudgacha talabnoma (pretenziya) yuborilgan.</textarea>
+                    </div>
+
+                    <button onclick="generateDemoClaim()" id="demoGenBtn" class="mt-4 w-full py-3.5 rounded-xl bg-apple-blue hover:bg-apple-blueHover text-white font-semibold text-xs tracking-wide shadow-sm transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-xs"></i> Hujjatni Shakllantirish
+                    </button>
+                </div>
+
+                <!-- Preview Area -->
+                <div class="lg:col-span-7 bg-neutral-50 rounded-xl border border-neutral-200/80 p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between pb-3 border-b border-neutral-200 mb-3 text-xs">
+                            <span class="font-semibold text-neutral-700 flex items-center gap-1.5">
+                                <i class="fa-solid fa-file-word text-blue-600"></i> Hujjat Matni
+                            </span>
+                            <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-blue-100/70 text-blue-700 font-medium">
+                                Chapdan 3.0 sm tikish maydoni
+                            </span>
+                        </div>
+                        <div id="demoOutput" class="bg-white rounded-lg p-4 border border-neutral-200 font-mono text-[11px] text-neutral-700 max-h-72 overflow-y-auto leading-relaxed whitespace-pre-wrap shadow-inner">
+Fuqarolik ishlari bo'yicha Mirobod tumanlararo sudiga
+
+Da'vogar: Aliyev Rustam Farxodovich
+Manzil: Toshkent sh., Chilonzor tumani, 5-mavze, 12-uy
+Tel: +998 90 123-45-67, JShShIR: 31204920192834
+
+Javobgar: Karimov Sanjar Olimovich
+Manzil: Toshkent sh., Mirobod tumani, Nukus ko'chasi, 45-uy
+Tel: +998 93 987-65-43
+
+Da'vo bahosi: 50 000 000 so'm
+Davlat boji: 2 000 000 so'm (4%)
+
+DA'VO ARIZASI
+(Qarz summasini undirish haqida)
+
+2023 yil 10 sentyabr kuni javobgar Karimov Sanjar mendan tilxat asosida 50 000 000 so'm qarz olgan. Qaytarish muddati 2024 yil 10 yanvar etib belgilangan bo'lsa-da, bugungi kunga qadar qaytarmadi...
+
+SO'RAYMAN:
+1. Javobgardan 50 000 000 so'm asosiy qarz undirilsin.
+2. To'langan davlat boji javobgar zimmasiga yuklatilsin.
+
+ILOVALAR:
+1. Qarz tilxati nusxasi;
+2. Talabnoma va pochta kvitansiyasi;
+3. Davlat boji to'lovi kvitansiyasi.
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-neutral-200 mt-3 flex items-center justify-between text-xs text-neutral-500">
+                        <span>Format: <strong>DOCX (Word) & Markdown</strong></span>
+                        <span class="text-emerald-600 font-medium"><i class="fa-solid fa-circle-check"></i> my.sud.uz uchun tayyor</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section: macOS Clean Cards -->
+    <section id="pricing" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-xs font-semibold tracking-wider text-apple-blue uppercase mb-2 block">Obuna & Litsenziyalash</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-neutral-900 mb-4">
+                Oddiy va Shaffof Tariflar
+            </h2>
+            <p class="text-sm md:text-base text-neutral-500 max-w-xl mx-auto">
+                Barcha tariflarda 14 kunlik bepul sinov muddati mavjud. Click va Payme orqali bir zumda to'lang.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+            <!-- SOLO ADVOKAT -->
+            <div class="bg-white rounded-2xl p-8 border border-neutral-200/90 shadow-macos-card flex flex-col justify-between hover:shadow-macos-hover transition-all duration-300">
+                <div>
+                    <div class="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2">Yakka Advokatlar</div>
+                    <h3 class="text-2xl font-bold text-neutral-900 mb-4">Solo Advokat</h3>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-4xl font-extrabold text-neutral-900">390 000</span>
+                        <span class="text-xs text-neutral-500 font-medium">so'm / oyiga</span>
+                    </div>
+                    <ul class="space-y-3 text-xs text-neutral-600 mb-8">
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-blue-600"></i> Cheksiz sud da'vo arizalari (.docx)</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-blue-600"></i> 115 ta my.sud.uz shablonlari</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-blue-600"></i> Shartnomalar auditi (oyiga 30 ta)</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-blue-600"></i> Boj & muddatlar kalkulyatori</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-blue-600"></i> Mijozlar va ishlar dosyasi (CRM)</li>
+                    </ul>
+                </div>
+                <button onclick="openCheckout('solo', 390000)" class="w-full py-3 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-900 font-semibold text-xs transition">
+                    Solo Tarifini Tanlash
+                </button>
+            </div>
+
+            <!-- ADVOKATLIK BYUROSI (Featured Apple Blue) -->
+            <div class="bg-white rounded-2xl p-8 border-2 border-apple-blue shadow-macos relative flex flex-col justify-between hover:shadow-macos-hover transition-all duration-300">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-apple-blue text-white font-bold text-[10px] tracking-wider uppercase shadow-sm">
+                    ENG MASHHUR
+                </div>
+                <div>
+                    <div class="text-xs font-semibold text-apple-blue uppercase tracking-wider mb-2">Byurolar & Hay'atlar</div>
+                    <h3 class="text-2xl font-bold text-neutral-900 mb-4">Advokatlik Byurosi</h3>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-4xl font-extrabold text-neutral-900">1 290 000</span>
+                        <span class="text-xs text-neutral-500 font-medium">so'm / oyiga</span>
+                    </div>
+                    <ul class="space-y-3 text-xs text-neutral-700 mb-8">
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-apple-blue"></i> <strong>5 tagacha advokat litsenziyasi</strong></li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-apple-blue"></i> Cheksiz shartnomalar Due Diligence</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-apple-blue"></i> <strong>Moot Court virtual sud zalida tayyorgarlik</strong></li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-apple-blue"></i> Sud eshituvlari taqvimi & eslatmalar</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-apple-blue"></i> 8,186 ta sud keyslari bazasi</li>
+                    </ul>
+                </div>
+                <button onclick="openCheckout('bureau', 1290000)" class="w-full py-3 rounded-full bg-apple-blue hover:bg-apple-blueHover text-white font-semibold text-xs shadow-sm transition">
+                    Byuro Uchun Xarid Qilish
+                </button>
+            </div>
+
+            <!-- ENTERPRISE -->
+            <div class="bg-white rounded-2xl p-8 border border-neutral-200/90 shadow-macos-card flex flex-col justify-between hover:shadow-macos-hover transition-all duration-300">
+                <div>
+                    <div class="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2">Kompaniyalar & Banklar</div>
+                    <h3 class="text-2xl font-bold text-neutral-900 mb-4">Enterprise</h3>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-3xl font-extrabold text-neutral-900">Kelishuv</span>
+                        <span class="text-xs text-neutral-500 font-medium">asosida</span>
+                    </div>
+                    <ul class="space-y-3 text-xs text-neutral-600 mb-8">
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-blue-600"></i> <strong>On-Premise (Lokal serverda o'rnatish)</strong></li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-blue-600"></i> Cheksiz foydalanuvchilar litsenziyasi</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-blue-600"></i> 1C va Didox bilan to'liq integratsiya</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-blue-600"></i> 24/7 Texnik qo'llab-quvvatlash</li>
+                    </ul>
+                </div>
+                <button onclick="alert('Enterprise taklif uchun bog\'laning: +998 71 200-00-57')" class="w-full py-3 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-900 font-semibold text-xs transition">
+                    Bog'lanish
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- macOS Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 bg-neutral-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-macos max-w-md w-full overflow-hidden border border-neutral-200">
+            <div class="bg-neutral-100/80 px-4 py-3 flex items-center justify-between border-b border-neutral-200">
+                <div class="window-traffic-lights">
+                    <button onclick="closeCheckout()" class="traffic-light traffic-close cursor-pointer"></button>
+                    <div class="traffic-light traffic-min"></div>
+                    <div class="traffic-light traffic-max"></div>
+                </div>
+                <div class="text-xs font-semibold text-neutral-700">To'lov Oynasi (Click / Payme)</div>
+                <div class="w-10"></div>
+            </div>
+
+            <div class="p-6">
+                <div class="text-center mb-6">
+                    <h3 class="text-xl font-bold text-neutral-900" id="modalPlanTitle">Solo Advokat</h3>
+                    <p class="text-xs text-neutral-500 mt-1">To'lov miqdori:</p>
+                    <div class="text-3xl font-extrabold text-apple-blue mt-1" id="modalAmount">390 000 so'm</div>
+                </div>
+
+                <div class="mb-5">
+                    <label class="block text-xs font-semibold text-neutral-700 mb-1.5">Telefon raqamingiz (Litsenziya SMS uchun):</label>
+                    <input type="text" id="billingPhone" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl p-3 text-xs text-neutral-900 focus:ring-2 focus:ring-blue-500 focus:outline-none" value="+998 ">
+                </div>
+
+                <div class="space-y-3 mb-4">
+                    <button onclick="payWith('click')" class="w-full py-3.5 px-4 rounded-xl bg-[#0089D0] hover:bg-[#007AB8] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition">
+                        <i class="fa-solid fa-arrow-pointer"></i> Click Up orqali to'lash
+                    </button>
+                    <button onclick="payWith('payme')" class="w-full py-3.5 px-4 rounded-xl bg-[#00CCCC] hover:bg-[#00B3B3] text-black font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition">
+                        <i class="fa-solid fa-wallet"></i> Payme orqali to'lash
+                    </button>
+                </div>
+                <p class="text-[11px] text-center text-neutral-400">
+                    To'lovdan so'ng litsenziya kaliti SMS orqali yuboriladi va tizimda faollashadi.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- macOS License Activation Modal -->
+    <div id="licenseModal" class="fixed inset-0 bg-neutral-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-macos max-w-md w-full overflow-hidden border border-neutral-200">
+            <div class="bg-neutral-100/80 px-4 py-3 flex items-center justify-between border-b border-neutral-200">
+                <div class="window-traffic-lights">
+                    <button onclick="closeLicenseModal()" class="traffic-light traffic-close cursor-pointer"></button>
+                    <div class="traffic-light traffic-min"></div>
+                    <div class="traffic-light traffic-max"></div>
+                </div>
+                <div class="text-xs font-semibold text-neutral-700">Litsenziyani Faollashtirish</div>
+                <div class="w-10"></div>
+            </div>
+
+            <div class="p-6">
+                <div class="text-center mb-5">
+                    <h3 class="text-lg font-bold text-neutral-900">Litsenziya Kalitini Kiriting</h3>
+                    <p class="text-xs text-neutral-500 mt-1">Format: ADV-SOLO-20261231-...</p>
+                </div>
+
+                <div class="mb-5">
+                    <input type="text" id="licenseInput" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl p-3 text-xs text-neutral-900 font-mono tracking-wider focus:ring-2 focus:ring-blue-500 focus:outline-none uppercase" placeholder="ADV-SOLO-20261231-...">
+                </div>
+
+                <button onclick="submitActivation()" class="w-full py-3 rounded-full bg-apple-blue hover:bg-apple-blueHover text-white font-semibold text-xs shadow-sm transition">
+                    Faollashtirish
+                </button>
+                <div id="activationResult" class="mt-3 text-center text-xs hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer: Clean Apple Style -->
+    <footer class="py-12 border-t border-neutral-200 text-xs text-neutral-400 mt-20">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2 text-neutral-600 font-medium">
+                <span>ADVOKAT AI &copy; 2026.</span>
+                <span>O'zbekiston Respublikasi LegalTech tizimi.</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#demo" class="hover:text-neutral-600">Jonli Darcha</a>
+                <a href="#pricing" class="hover:text-neutral-600">Tariflar</a>
+                <a href="javascript:openLicenseModal()" class="hover:text-neutral-600">Kalit tekshirish</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        let currentPlan = 'solo';
+        let currentPrice = 390000;
+
+        function openCheckout(plan, price) {
+            currentPlan = plan;
+            currentPrice = price;
+            document.getElementById('modalPlanTitle').innerText = plan === 'solo' ? 'Solo Advokat Ta\'rifi' : 'Advokatlik Byurosi Ta\'rifi';
+            document.getElementById('modalAmount').innerText = price.toLocaleString('uz-UZ') + " so'm";
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function openLicenseModal() {
+            document.getElementById('licenseModal').classList.remove('hidden');
+        }
+
+        function closeLicenseModal() {
+            document.getElementById('licenseModal').classList.add('hidden');
+        }
+
+        function payWith(method) {
+            const phone = document.getElementById('billingPhone').value.trim();
+            if (!phone || phone.length < 9) {
+                alert("Iltimos, to'liq telefon raqamingizni kiriting!");
+                return;
+            }
+            if (method === 'click') {
+                window.open(`https://my.click.uz/services/pay?service_id=32104&merchant_id=21509&amount=${currentPrice}&transaction_param=ADV_${currentPlan.toUpperCase()}&return_url=https://advokat-ai.uz/success`, '_blank');
+            } else {
+                window.open(`https://checkout.paycom.uz/64f9b8c9d1234567890abcdef?amount=${currentPrice*100}&account[order_id]=ADV_${currentPlan.toUpperCase()}&account[phone]=${encodeURIComponent(phone)}`, '_blank');
+            }
+            closeCheckout();
+        }
+
+        function submitActivation() {
+            const key = document.getElementById('licenseInput').value.trim();
+            const resEl = document.getElementById('activationResult');
+            resEl.classList.remove('hidden');
+            if (!key.startsWith('ADV-')) {
+                resEl.className = "mt-3 text-center text-xs text-rose-600 font-medium";
+                resEl.innerText = "❌ Noto'g'ri kalit formati! Kalit ADV- bilan boshlanishi kerak.";
+                return;
+            }
+            resEl.className = "mt-3 text-center text-xs text-emerald-600 font-medium";
+            resEl.innerText = "✅ Litsenziya muvaffaqiyatli faollashtirildi! 30 kunlik to'liq kirish ochildi.";
+            setTimeout(() => closeLicenseModal(), 2000);
+        }
+
+        function generateDemoClaim() {
+            const btn = document.getElementById('demoGenBtn');
+            const out = document.getElementById('demoOutput');
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Tayyorlanmoqda...';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Hujjatni Shakllantirish';
+                out.innerText = `Fuqarolik ishlari bo'yicha Mirobod tumanlararo sudiga\n\nDa'vogar: Aliyev Rustam Farxodovich (JShShIR: 31204920192834)\nJavobgar: Karimov Sanjar Olimovich\nDa'vo bahosi: 50 000 000 so'm | Davlat boji: 2 000 000 so'm (4%)\n\nDA'VO ARIZASI\n(Qarz summasini undirish haqida)\n\n2023 yil 10 sentyabr kuni javobgar Karimov Sanjar Olimovich mendan tilxat asosida 50 000 000 so'm qarz olgan. Qaytarish muddati 2024 yil 10 yanvar etib belgilangan bo'lsa-da, bugungi kunga qadar qaytarmadi.\n\nFK 236 va 732-moddalariga asosan,\n\nSO'RAYMAN:\n1. Javobgardan 50 000 000 so'm asosiy qarz undirilsin.\n2. To'langan davlat boji javobgar zimmasiga yuklatilsin.\n\nIlovalar: 1. Qarz tilxati; 2. Pretenziya va kvitansiya; 3. Davlat boji kvitansiyasi.`;
+            }, 600);
+        }
+    </script>
+</body>
+</html>

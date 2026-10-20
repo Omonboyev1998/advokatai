@@ -1,0 +1,33 @@
+{
+ "version": 1,
+ "quiet_hours": "",
+ "routines": [
+  {
+   "id": "r3826b7",
+   "name": "Opening briefing",
+   "kind": "builtin",
+   "builtin": "briefing",
+   "text": "",
+   "trigger": {
+    "type": "startup"
+   },
+   "options": {
+    "news": false,
+    "news_topic": "O'zbekiston huquqiy yangiliklari",
+    "extra": ""
+   },
+   "deliver": "voice",
+   "agent": "general",
+   "minutes": 10,
+   "quiet": false,
+   "system": true,
+   "enabled": false,
+   "source": "",
+   "created": 1789634108.0,
+   "next_ts": 0.0,
+   "last_run": 0.0,
+   "runs": 0,
+   "last_result": ""
+  }
+ ]
+}
